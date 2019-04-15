@@ -70,23 +70,23 @@ export default {
     },
     copyToClipBoard () {
       const code = this.$refs['caesarCode']
-      const errorMessage = 'Oops, unable to copy'
+      const previousSelection = getSelection().rangeCount > 0 ? getSelection().getRangeAt(0) : false
+      const errorMessage = 'Oops, unable to copy!'
+      const successMessage = 'Code successfully copied to clipboard'
+      let success = false
 
       code.focus()
       code.select()
 
-      try {
-        const successful = document.execCommand('copy')
-        const message = successful ? 'Code successfully copied to clipboard' : errorMessage
+      success = document.execCommand('copy')
 
-        M.toast({ html: message })
-      } catch (err) {
-        M.toast({ html: errorMessage })
+      M.toast({ html: success ? errorMessage : successMessage })
+
+      getSelection().removeAllRanges()
+
+      if (previousSelection) {
+        getSelection().addRange(previousSelection)
       }
-
-      /* unselect the range */
-      code.setAttribute('type', 'hidden')
-      window.getSelection().removeAllRanges()
     }
   }
 }
