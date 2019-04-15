@@ -1,10 +1,6 @@
 export default class CaesarCode {
   static modulo (n: number, p: number): number {
-    if (n < 0) {
-      n = p - Math.abs(n) % p
-    }
-
-    return n % p
+    return ((n % p) + p) % p
   }
 
   static encrypt (message: string, key: number) {
