@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "materialize-css": "^1.0.0",
     "vue": "^2.6.6"
   },
   "devDependencies": {
+    "@types/materialize-css": "^1.0.6",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
