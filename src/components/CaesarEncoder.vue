@@ -51,15 +51,15 @@ export default {
 
       for (let i = 0; i < message.length; i++) {
         let code = message.charCodeAt(i)
-        let foundCode = false
+        let isCodeFound = false
 
         for (let j = 0; j < ranges.length; j++) {
           const base = ranges[j][0]
           const max = ranges[j][1]
 
-          if (code >= base && code <= max && !foundCode) {
+          if (code >= base && code <= max && !isCodeFound) {
             code = this.modulo((code - base + Number(key)), (max - base + 1)) + base
-            foundCode = true
+            isCodeFound = true
           }
         }
 
@@ -69,23 +69,22 @@ export default {
       return encryptedMessage
     },
     copyToClipBoard () {
-      const code = this.$refs['caesarCode']
-      const previousSelection = getSelection().rangeCount > 0 ? getSelection().getRangeAt(0) : false
+      const codeElement = this.$refs['caesarCode']
+      const selection = getSelection()
+      const previousSelection = selection.rangeCount > 0 ? selection.getRangeAt(0) : false
       const errorMessage = 'Oops, unable to copy!'
       const successMessage = 'Code successfully copied to clipboard'
       let success = false
 
-      code.focus()
-      code.select()
+      codeElement.select()
 
       success = document.execCommand('copy')
+      selection.removeAllRanges()
 
-      M.toast({ html: success ? errorMessage : successMessage })
-
-      getSelection().removeAllRanges()
+      M.toast({ html: success ? successMessage : errorMessage })
 
       if (previousSelection) {
-        getSelection().addRange(previousSelection)
+        selection.addRange(previousSelection)
       }
     }
   }
