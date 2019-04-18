@@ -58,7 +58,7 @@ export default {
           const max = ranges[j][1]
 
           if (code >= base && code <= max && !isCodeFound) {
-            code = this.modulo((code - base + Number(key)), (max - base + 1)) + base
+            code = this.modulo((code - base + key), (max - base + 1)) + base
             isCodeFound = true
           }
         }
