@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-content">
       <div class="input-field">
-        <input id="keyInput" type="number" v-model="currentKey" step="1" min="1" max="25" @input="updateCaesarCode"/>
+        <input id="keyInput" type="number" v-model.number="currentKey" step="1" min="1" max="25" @input="updateCaesarCode"/>
         <label for="keyInput">Key</label>
       </div>
       <div class="input-field">
